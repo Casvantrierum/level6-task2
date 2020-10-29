@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 import com.example.level6_task2.R
 import com.example.level6_task2.model.Movie
@@ -26,20 +27,18 @@ class MovieListAdapter (private val movieList: List<Movie>) :
     override fun getItemCount(): Int = movieList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.databind(movieList[position])
+        holder.databind(movieList[position], position)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun databind(movie: Movie) {
-            itemView.tvTitle.text = movie.title
+        fun databind(movie: Movie, position: Int) {
+            val ranking = position+1
+            itemView.tvTitle.text = "$ranking."
+            Glide.with(context).load(movie.getPosterImageUrl()).into(itemView.ivPoster)
         }
 
 //        init {
 //            itemView.setOnClickListener { onClick(colors[adapterPosition]) }
-//        }
-
-//        fun bind(colorItem: ColorItem) {
-//            Glide.with(context).load(colorItem.getImageUrl()).into(itemView.ivColor)
 //        }
     }
 

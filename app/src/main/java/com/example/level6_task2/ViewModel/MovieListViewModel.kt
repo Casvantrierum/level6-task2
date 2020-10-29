@@ -33,12 +33,12 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
      * The viewModelScope is bound to Dispatchers.Main and will automatically be cancelled when the ViewModel is cleared.
      * Extension method of lifecycle-viewmodel-ktx library
      */
-    fun getMovieListByYear() {
+    fun getMovieListByYear(year: String) {
         viewModelScope.launch {
             try {
                 //the MovieListRepository sets it's own livedata property
                 //our own MovieList LiveData property points to te one in that repository
-                movieListRepository.getMovieListByYear()
+                movieListRepository.getMovieListByYear(year)
             } catch (error: MovieListRepository.MovieListRefreshError) {
                 _errorText.value = error.message
                 Log.e("MovieList error", error.cause.toString())

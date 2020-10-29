@@ -22,11 +22,11 @@ class MovieListRepository {
     /**
      * suspend function that calls a suspend function from the numbersApi call
      */
-    suspend fun getMovieListByYear()  {
+    suspend fun getMovieListByYear(year: String)  {
         try {
             //timeout the request after 5 seconds
             val result = withTimeout(5_000) {
-                movieListApiService.getMovieListByYear()
+                movieListApiService.getMovieListByYear(year)
             }
 
             _movieList.value = result

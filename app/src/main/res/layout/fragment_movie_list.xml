@@ -22,11 +22,13 @@
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/rvMovies"
         app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
         app:layout_constraintStart_toEndOf="@+id/tvIntro"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/year"
@@ -48,7 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />

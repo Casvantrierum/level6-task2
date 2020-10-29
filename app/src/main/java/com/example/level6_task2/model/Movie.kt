@@ -3,7 +3,6 @@ package com.example.level6_task2.model
 import com.google.gson.annotations.SerializedName
 
 data class Movie (
-
     @SerializedName("popularity") val popularity : Double,
     @SerializedName("vote_count") val vote_count : Int,
     @SerializedName("video") val video : Boolean,
@@ -18,4 +17,6 @@ data class Movie (
     @SerializedName("vote_average") val vote_average : Double,
     @SerializedName("overview") val overview : String,
     @SerializedName("release_date") val release_date : String
-)
+){
+    fun getPosterImageUrl() = "https://image.tmdb.org/t/p/w500/$poster_path"
+}
