@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -50,6 +51,8 @@ class MovieListFragment : Fragment() {
             movieListViewModel.getMovieListByYear(year)
         }
 
+        pbFetching.isVisible = false;
+
         movieViewModel= ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
 
         movieListAdapter = MovieListAdapter(movieList, ::onColorClick)
@@ -79,10 +82,11 @@ class MovieListFragment : Fragment() {
             movieListAdapter.notifyDataSetChanged()
         })
 
-        movieViewModel.movie.observe(viewLifecycleOwner, {
-            Log.i("OBSERVE", "LIST->INFO")
-            Log.i("OK", "JA HIER DOET DIE HET WEL")
-            Log.i("OK", it?.title)
+        movieListViewModel.fetching.observe(viewLifecycleOwner, {
+            it.let {
+                Log.i("IT FETCH", it.toString())
+                pbFetching.isVisible = it
+            }
         })
     }
 

@@ -29,6 +29,8 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val errorText: LiveData<String>
         get() = _errorText
 
+    val fetching = movieListRepository.fetching
+
     /**
      * The viewModelScope is bound to Dispatchers.Main and will automatically be cancelled when the ViewModel is cleared.
      * Extension method of lifecycle-viewmodel-ktx library
@@ -45,6 +47,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
             }
         }
     }
+
     fun addMoreMovies() {
         viewModelScope.launch {
             try {
