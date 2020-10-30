@@ -12,4 +12,5 @@
     <string name="intro">"The most popular movies of: "</string>
     <string name="year">year</string>
     <string name="submit">Submit</string>
+    <string name="overviewTitle">overview</string>
 </resources>

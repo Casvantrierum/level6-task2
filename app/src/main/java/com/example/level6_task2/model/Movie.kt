@@ -17,6 +17,7 @@ data class Movie (
     @SerializedName("vote_average") val vote_average : Double,
     @SerializedName("overview") val overview : String,
     @SerializedName("release_date") val release_date : String
-){
+) {
     fun getPosterImageUrl() = "https://image.tmdb.org/t/p/w500/$poster_path"
+    fun getBackdropImageUrl() = "https://image.tmdb.org/t/p/w500/$backdrop_path"
 }

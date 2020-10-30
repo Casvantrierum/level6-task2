@@ -1,4 +1,4 @@
-package com.example.level6_task2.ViewModel
+package com.example.level6_task2.viewmodels
 
 import android.app.Application
 import android.util.Log
