@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
 import com.example.level6_task2.R
 import com.example.level6_task2.model.Movie
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MovieListAdapter (private val movieList: List<Movie>, private val onClick: (Movie) -> Unit) :

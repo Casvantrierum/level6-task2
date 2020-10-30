@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel (application: Application) : AndroidViewModel(application) {
 
-    private val movieRepository = MovieRepository(application.applicationContext)
+    private val movieRepository = MovieRepository()
 
     /**
      * This property points direct to the LiveData in the repository, that value
@@ -43,7 +43,6 @@ class MovieViewModel (application: Application) : AndroidViewModel(application) 
                 movieRepository.setMovie(movieToView)
             } catch (error: MovieListRepository.MovieListRefreshError) {
                 _errorText.value = error.message
-                Log.e("MovieList error", error.cause.toString())
             }
         }
     }

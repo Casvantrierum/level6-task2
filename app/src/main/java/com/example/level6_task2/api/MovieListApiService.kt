@@ -3,7 +3,6 @@ package com.example.level6_task2.api
 import com.example.level6_task2.BuildConfig
 import com.example.level6_task2.model.MovieList
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieListApiService {

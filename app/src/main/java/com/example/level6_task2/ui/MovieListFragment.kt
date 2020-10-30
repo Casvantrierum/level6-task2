@@ -1,7 +1,6 @@
 package com.example.level6_task2.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +50,7 @@ class MovieListFragment : Fragment() {
             movieListViewModel.getMovieListByYear(year)
         }
 
-        pbFetching.isVisible = false;
+        pbFetching.isVisible = false
 
         movieViewModel= ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
 
@@ -65,7 +64,6 @@ class MovieListFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val year = etYear.text.toString()
                     movieListViewModel.addMoreMovies()
                 }
             }
@@ -76,7 +74,6 @@ class MovieListFragment : Fragment() {
 
     private fun observeMovieList() {
         movieListViewModel.movieList.observe(viewLifecycleOwner, {
-            Log.i("OBSERVE", "LIST->LIST")
             movieList.clear()
             movieList.addAll(it.results)
             movieListAdapter.notifyDataSetChanged()
@@ -84,7 +81,6 @@ class MovieListFragment : Fragment() {
 
         movieListViewModel.fetching.observe(viewLifecycleOwner, {
             it.let {
-                Log.i("IT FETCH", it.toString())
                 pbFetching.isVisible = it
             }
         })

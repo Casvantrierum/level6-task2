@@ -1,11 +1,9 @@
 package com.example.level6_task2.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.level6_task2.api.MovieListApi
 import com.example.level6_task2.api.MovieListApiService
-import com.example.level6_task2.model.Movie
 import com.example.level6_task2.model.MovieList
 import kotlinx.coroutines.withTimeout
 
@@ -52,15 +50,14 @@ class MovieListRepository {
     suspend fun addMoreMovies()  {
         _fetching.value = true
         try {
-            val page = _movieList.value?.page!! +1;
+            val page = _movieList.value?.page!! +1
             //timeout the request after 5 seconds
             val result = withTimeout(5_000) {
                 movieListApiService.addMoreMovies(lastSearchedYear, page)
             }
 
-            var list = _movieList.value!!.results
-
-            result.results.addAll(0, list)
+            //add current list to new items
+            result.results.addAll(0, _movieList.value!!.results)
             _movieList.value = result
         } catch (error: Throwable) {
             throw MovieListRefreshError("Unable to refresh movie list", error)

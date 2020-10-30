@@ -1,26 +1,17 @@
 package com.example.level6_task2.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.level6_task2.R
-import com.example.level6_task2.adapter.MovieListAdapter
 import com.example.level6_task2.model.Movie
-import com.example.level6_task2.viewmodels.MovieListViewModel
 import com.example.level6_task2.viewmodels.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_movie_info.*
-import kotlinx.android.synthetic.main.fragment_movie_list.*
-import kotlinx.android.synthetic.main.item_movie.view.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -50,7 +41,7 @@ class MovieInfoFragment : Fragment() {
     }
     
     private fun observeMovie() {
-        movieViewModel.movie.observe(viewLifecycleOwner, Observer {
+        movieViewModel.movie.observe(viewLifecycleOwner, {
             it?.let{
                 movie = it
                 updateUI()
@@ -67,8 +58,7 @@ class MovieInfoFragment : Fragment() {
         tvRating.text = movie.vote_average.toString()
         tvOverview.text = movie.overview
 
-        var rating : Float = ((movie.vote_average/10).toFloat())
-        Log.i("rating", rating.toString())
-        ratingBar.rating = rating
+        //set rating star
+        ratingBar.rating = ((movie.vote_average/10).toFloat())
     }
 }
