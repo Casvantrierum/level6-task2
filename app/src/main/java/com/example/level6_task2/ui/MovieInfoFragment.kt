@@ -66,5 +66,9 @@ class MovieInfoFragment : Fragment() {
         tvRelease.text = movie.release_date
         tvRating.text = movie.vote_average.toString()
         tvOverview.text = movie.overview
+
+        var rating : Float = ((movie.vote_average/10).toFloat())
+        Log.i("rating", rating.toString())
+        ratingBar.rating = rating
     }
 }

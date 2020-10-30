@@ -45,4 +45,16 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
             }
         }
     }
+    fun addMoreMovies() {
+        viewModelScope.launch {
+            try {
+                //the MovieListRepository sets it's own livedata property
+                //our own MovieList LiveData property points to te one in that repository
+                movieListRepository.addMoreMovies()
+            } catch (error: MovieListRepository.MovieListRefreshError) {
+                _errorText.value = error.message
+                Log.e("MovieList error", error.cause.toString())
+            }
+        }
+    }
 }
