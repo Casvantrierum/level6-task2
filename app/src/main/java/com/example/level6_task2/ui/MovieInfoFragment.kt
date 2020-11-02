@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.example.level6_task2.R
 import com.example.level6_task2.model.Movie
@@ -21,8 +20,9 @@ class MovieInfoFragment : Fragment() {
 
     private lateinit var movie: Movie
 
-    //private val movieViewModel: MovieViewModel by viewModels()
-    private lateinit var movieViewModel: MovieViewModel
+    // for shared viewmodels between fragments
+    // https://developer.android.com/topic/libraries/architecture/viewmodel#sharing
+    private val movieViewModel: MovieViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +35,7 @@ class MovieInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        movieViewModel= ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
+        //movieViewModel= ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
 
         observeMovie()
     }

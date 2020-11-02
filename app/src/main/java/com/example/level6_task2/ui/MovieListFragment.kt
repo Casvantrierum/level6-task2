@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,9 +30,11 @@ class MovieListFragment : Fragment() {
     private var movieList = arrayListOf<Movie>()
     private lateinit var movieListAdapter: MovieListAdapter
 
-    private val movieListViewModel: MovieListViewModel by viewModels()
-    private lateinit var movieViewModel: MovieViewModel
+    // for shared viewmodels between fragments
+    // https://developer.android.com/topic/libraries/architecture/viewmodel#sharing
+    private val movieViewModel: MovieViewModel by activityViewModels()
 
+    private val movieListViewModel: MovieListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +54,7 @@ class MovieListFragment : Fragment() {
 
         pbFetching.isVisible = false
 
-        movieViewModel= ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
+        //movieViewModel= ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
 
         movieListAdapter = MovieListAdapter(movieList, ::onColorClick)
         rvMovies.layoutManager =
