@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -30,8 +31,6 @@ class MovieListFragment : Fragment() {
     private var movieList = arrayListOf<Movie>()
     private lateinit var movieListAdapter: MovieListAdapter
 
-    // for shared viewmodels between fragments
-    // https://developer.android.com/topic/libraries/architecture/viewmodel#sharing
     private val movieViewModel: MovieViewModel by activityViewModels()
 
     private val movieListViewModel: MovieListViewModel by viewModels()
@@ -53,8 +52,6 @@ class MovieListFragment : Fragment() {
         }
 
         pbFetching.isVisible = false
-
-        //movieViewModel= ViewModelProvider(requireActivity()).get(MovieViewModel::class.java)
 
         movieListAdapter = MovieListAdapter(movieList, ::onColorClick)
         rvMovies.layoutManager =
@@ -86,6 +83,13 @@ class MovieListFragment : Fragment() {
                 pbFetching.isVisible = it
             }
         })
+
+        // Observe the error message.
+        movieListViewModel.errorText.observe(viewLifecycleOwner, {
+            pbFetching.isVisible = false
+            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+        })
+
     }
 
     private fun onColorClick(movie: Movie) {

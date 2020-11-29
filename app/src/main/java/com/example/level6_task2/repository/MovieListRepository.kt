@@ -60,6 +60,7 @@ class MovieListRepository {
             result.results.addAll(0, _movieList.value!!.results)
             _movieList.value = result
         } catch (error: Throwable) {
+            _fetching.value = false
             throw MovieListRefreshError("Unable to refresh movie list", error)
         }
         _fetching.value = false
